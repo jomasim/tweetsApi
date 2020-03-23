@@ -7,10 +7,11 @@ app = Flask(__name__)
 api = Api(app)
 
 class Tweets(Resource):
-    def get(self, username):
-        tweetCriteria = got.manager.TweetCriteria().setUsername("@MOH_Kenya")\
-                                           .setMaxTweets(5)\
-                                           .setTopTweets(True)
+    def get(self, username="@MOH_Kenya"):
+        tweetCriteria = got.manager.TweetCriteria().setUsername(username)\
+                                           .setMaxTweets(10)\
+                                           .setTopTweets(True)\
+                                           .setEmoji("unicode")
         tweets = got.manager.TweetManager.getTweets(tweetCriteria)
         text_tweets = [[tweet.date, tweet.text] for tweet in tweets]
         return make_response(jsonify(text_tweets), 200)
