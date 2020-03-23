@@ -36,7 +36,7 @@ PySocks==1.6.7
 pytz==2019.3
 requests==2.21.0
 six==1.12.0
-urllib3==1.22
+urllib3==1.24.2
 Werkzeug==1.0.0
 youtube-dl==2019.3.9
 zipp==3.1.0
