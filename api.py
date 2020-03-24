@@ -8,13 +8,12 @@ api = Api(app)
 
 class Tweets(Resource):
     def get(self, username="@MOH_Kenya"):
-        max = request.args['max'] or 5
         tweetCriteria = got.manager.TweetCriteria().setUsername(username)\
-                                           .setMaxTweets(max)\
+                                           .setMaxTweets(5)\
                                            .setTopTweets(True)\
                                            .setEmoji("unicode")
         tweets = got.manager.TweetManager.getTweets(tweetCriteria)
-        text_tweets = [[tweet.date, tweet.text] for tweet in tweets]
+        text_tweets = [[tweet.date, tweet.permalink, tweet.text] for tweet in tweets]
         return make_response(jsonify(text_tweets), 200)
 
 api.add_resource(Tweets, '/<string:username>')
